@@ -93,4 +93,15 @@
 .error-msg {
   color: red;
 }
+
+.note-msg {
+  padding-top: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.note-msg span {
+  color: red;
+}
 /*# sourceMappingURL=FormHandler.css.map */

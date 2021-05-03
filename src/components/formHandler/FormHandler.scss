@@ -82,3 +82,14 @@ $shadow: 0 5px 50px 0 rgba(0, 0, 0, 0.1), 0 6px 50px 0 rgba(0, 0, 0, 0.1);
 .error-msg {
     color: red;
 }
+
+.note-msg {
+    padding-top: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+
+    span {
+        color: red;
+    }
+}

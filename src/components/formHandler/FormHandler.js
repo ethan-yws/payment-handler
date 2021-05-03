@@ -4,6 +4,9 @@ import "./FormHandler.css";
 import "react-credit-cards/es/styles-compiled.css";
 import "../formValidation/formValidation";
 import formValidation from "../formValidation/formValidation";
+import db from "../../firebase";
+import firebase from "firebase";
+import { Link } from "react-router-dom";
 
 function FormHandler() {
     // card fields
@@ -29,8 +32,19 @@ function FormHandler() {
 
         setErrors(formValidation(cardInfo)[1]);
 
+        // If all card fields are valid, upload it to firbase db
         if (formValidation(cardInfo)[0]) {
             console.log(cardInfo);
+
+            db.collection("cards").add({
+                card: {
+                    cardNo: cardNo,
+                    cardName: cardName,
+                    expiry: expiry,
+                    cvv: cvv,
+                },
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            });
         }
     };
 
@@ -135,8 +149,26 @@ function FormHandler() {
                             onClick={submitHandler}
                         />
                     </div>
+                    {/* View all cards stored on Firebase DB */}
+                    <div className="cards-on-firebase-container">
+                        <label>
+                            *Admin Operation
+                            <Link to="/cards">
+                                <input
+                                    className="view-all-cards-button"
+                                    type="button"
+                                    value="View Cards on Firebase"
+                                />
+                            </Link>
+                        </label>
+                    </div>
                 </form>
             </div>
+            <p className="note-msg">
+                Note: This is a demo page, <span>Do not</span> provide{" "}
+                <span>real credit card</span> infomations, otherwise your card
+                information will be stored on cloud
+            </p>
         </div>
     );
 }
